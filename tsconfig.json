@@ -24,9 +24,9 @@
       "@/*": ["./src/*"],
       "@components": ["./src/components/*"],
       "@pages": ["./src/pages/*"],
-      "@helpers": ["./src/helpers/*"],
+      "@helpers/*": ["./src/helpers/*"],
       "@types/*": ["./src/types/*"],
-      "@utils": ["./src/utils/*"],
+      "@utils/*": ["./src/utils/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@services/*": ["./src/services/*"]
     }
