@@ -25,7 +25,10 @@
       "@components": ["./src/components/*"],
       "@pages": ["./src/pages/*"],
       "@helpers": ["./src/helpers/*"],
-      "@types/*": ["./src/types/*"]
+      "@types/*": ["./src/types/*"],
+      "@utils": ["./src/utils/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@services/*": ["./src/services/*"]
     }
   },
   "include": ["src"],
