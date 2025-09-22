@@ -1,38 +1,27 @@
-export interface Film {
-  id: number;
-  title: string;
-  overview: string;
-  poster_path: string | null;
-  backdrop_path: string | null;
-  release_date: string;
-  vote_average: number;
-  vote_count: number;
-  genre_ids: number[];
-  original_language: string;
-  original_title: string;
-  popularity: number;
-  adult: boolean;
-  video: boolean;
-}
+import type { Film } from "@/types";
+const URL = import.meta.env.VITE_API_URL;
+const TOKEN = import.meta.env.VITE_READ_ACCESS_TOKEN;
+const CATEGORY = "popular";
+const URL_CATEGORY = `${URL}/${CATEGORY}`;
 
-export interface FilmDetails extends Film {
-  genres: Genre[];
-  runtime: number;
-  budget: number;
-  revenue: number;
-  production_companies: ProductionCompany[];
-}
+const options = {
+  method: "GET",
+  headers: {
+    "User-Agent": "insomnia/11.6.0",
+    Authorization: `Bearer ${TOKEN}`,
+  },
+};
 
-export interface Genre {
-  id: number;
-  name: string;
-}
-
-export interface ProductionCompany {
-  id: number;
-  logo_path: string | null;
-  name: string;
-  origin_country: string;
-}
-
-export type FilmCategory = "popular" | "top_rated" | "upcoming";
+export const getFilmsData = async () => {
+  try {
+    const response = await fetch(URL_CATEGORY, options);
+    if (!response.ok) {
+      throw new Error(`Error while fetching films data: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch films data:", error);
+    throw error;
+  }
+};
