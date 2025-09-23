@@ -1,9 +1,11 @@
-// import type { Film } from "@/types";
-import { filmsData } from "@/services";
+import React from "react";
+import { useFilms } from "@/hooks/useFilms";
+import "./Home.scss";
 
-export async function Home({ films_data }: any) {
-  const data = await filmsData();
-  console.log("🚀 ~ Home ~ data:", data);
-  console.log("films: ", films_data);
-  return <h1>This is your home, friend!</h1>;
-}
+export const Home: React.FC = () => {
+  const popularFilms = useFilms("popular");
+  const topRatedFilms = useFilms("top_rated");
+  const upcomingFilms = useFilms("upcoming");
+
+  return <div className="home"></div>;
+};
