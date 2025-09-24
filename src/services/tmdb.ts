@@ -12,7 +12,7 @@ const options = {
 };
 
 export const filmsService = {
-  getFilmsByCategory: async (category: FilmCategory = BASE_CATEGORY) => {
+  getFilms: async (category: FilmCategory = BASE_CATEGORY) => {
     try {
       const response = await fetch(`${BASE_URL}/${category}`, options);
       if (!response.ok) {
@@ -38,23 +38,6 @@ export const filmsService = {
     } catch (error) {
       console.error("Failed to fetch film details:", error);
       throw error;
-    }
-  },
-  getFilms: async () => {
-    try {
-      const [popularFilms, topRatedFilms, upcomingFilms] = await Promise.all([
-        filmsService.getFilmsByCategory("popular"),
-        filmsService.getFilmsByCategory("popular"),
-        filmsService.getFilmsByCategory("popular"),
-      ]);
-      return {
-        popularFilms,
-        topRatedFilms,
-        upcomingFilms,
-      };
-    } catch (error) {
-      console.error(`getFilms failed: ${error}`);
-      throw Error(`No films retrieved: ${error}`);
     }
   },
 };
