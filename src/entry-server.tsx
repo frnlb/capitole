@@ -1,17 +1,17 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
-import { filmsService } from "./services";
+import { getFilms } from "./services";
 import App from "./App";
 
 export type SsrData = {
-  films: Awaited<ReturnType<typeof filmsService.getFilmsByCategory>>;
+  films: Awaited<ReturnType<typeof getFilms>>;
 };
 
 export async function render(
   _url: string
 ): Promise<{ html: string; data: SsrData }> {
   try {
-    const films = await filmsService.getFilmsByCategory();
+    const films = await getFilms();
     const data: SsrData = { films };
 
     const html = renderToString(
@@ -22,6 +22,16 @@ export async function render(
     return { html, data };
   } catch (error) {
     console.error("Error at entry server render function: ", error);
-    return { html: "", data: { films: { results: [] } } };
+    return {
+      html: "",
+      data: {
+        films: {
+          genres: [],
+          popularFilms: [],
+          topRatedFilms: [],
+          upcomingFilms: [],
+        },
+      },
+    };
   }
 }

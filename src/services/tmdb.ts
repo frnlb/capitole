@@ -2,6 +2,8 @@ import type { Film, FilmCategory } from "@/types";
 const BASE_URL = import.meta.env.VITE_API_URL;
 const TOKEN = import.meta.env.VITE_READ_ACCESS_TOKEN;
 const BASE_CATEGORY: FilmCategory = "popular";
+const GENRE = "genre/movie/list";
+const MOVIES = "movie";
 
 const options = {
   method: "GET",
@@ -14,29 +16,32 @@ const options = {
 export const filmsService = {
   getFilmsByCategory: async (category: FilmCategory = BASE_CATEGORY) => {
     try {
-      const response = await fetch(`${BASE_URL}/${category}`, options);
+      const response = await fetch(
+        `${BASE_URL}/${MOVIES}/${category}`,
+        options
+      );
       if (!response.ok) {
         throw new Error(`Error while fetching films data: ${response.status}`);
       }
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Failed to fetch films data:", error);
+      console.error("Failed to fetch films data: ", error);
       throw error;
     }
   },
-  getFilmDetails: async (id: Film["id"]) => {
+  getFilmsGenres: async () => {
     try {
-      const response = await fetch(`${BASE_URL}/${id}`, options);
+      const response = await fetch(`${BASE_URL}/${GENRE}`, options);
       if (!response.ok) {
         throw new Error(
-          `Error while fetching film details: ${response.status}`
+          `Error while fetching films's genres: ${response.status}`
         );
       }
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Failed to fetch film details:", error);
+      console.error("Failed to fetch films's genres: ", error);
       throw error;
     }
   },
@@ -44,12 +49,15 @@ export const filmsService = {
 
 export const getFilms = async () => {
   try {
-    const [popularFilms, topRatedFilms, upcomingFilms] = await Promise.all([
-      filmsService.getFilmsByCategory("popular"),
-      filmsService.getFilmsByCategory("top_rated"),
-      filmsService.getFilmsByCategory("upcoming"),
-    ]);
+    const [genres, popularFilms, topRatedFilms, upcomingFilms] =
+      await Promise.all([
+        filmsService.getFilmsGenres(),
+        filmsService.getFilmsByCategory("popular"),
+        filmsService.getFilmsByCategory("top_rated"),
+        filmsService.getFilmsByCategory("upcoming"),
+      ]);
     return {
+      genres,
       popularFilms,
       topRatedFilms,
       upcomingFilms,
