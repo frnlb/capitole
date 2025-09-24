@@ -1,0 +1,1 @@
+import { colorMap } from "./styles";
