@@ -1,1 +1,2 @@
-import { colorMap } from "./styles";
+export * from "./styles";
+export * from "./movies";

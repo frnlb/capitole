@@ -16,7 +16,6 @@ export const Home: React.FC<{ films: { results: Film[] } }> = ({ films }) => {
   return (
     <div className="page">
       <h1>Home</h1>
-      {/* {popFilms} */}
     </div>
   );
 };
