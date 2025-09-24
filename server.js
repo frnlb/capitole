@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import express from "express";
+import serialize from "serialize-javascript";
 
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
@@ -52,7 +53,7 @@ app.use("*all", async (req, res) => {
 
     const rendered = await render(url);
 
-    const hydratedScript = `<script>window.__INITIAL_DATA__= ${JSON.stringify(
+    const hydratedScript = `<script>window.__INITIAL_DATA__= ${serialize(
       rendered.data
     )};</script>`;
 
