@@ -2,16 +2,19 @@ import { useState, useEffect } from "react";
 import { Film, FilmCategory } from "@/types";
 import { filmsService } from "@/services";
 
-export const useFilms = (category: FilmCategory) => {
-  const [films, setFilms] = useState<Film[]>([]);
-  const [loading, setLoading] = useState(true);
+export const useFilms = (category: FilmCategory, initialData?: any) => {
+  const [films, setFilms] = useState<Film[]>(initialData?.results || []);
+  const [loading, setLoading] = useState(!initialData);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (initialData) {
+      return;
+    }
     const fetchFilms = async () => {
       try {
         setLoading(true);
-        const data = await filmsService.getFilms(category);
+        const data = await filmsService.getFilmsByCategory(category);
         setFilms(data);
         setError(null);
       } catch (err) {
@@ -23,7 +26,7 @@ export const useFilms = (category: FilmCategory) => {
     };
 
     fetchFilms();
-  }, [category]);
+  }, [category, initialData]);
 
   return { films, loading, error };
 };

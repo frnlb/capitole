@@ -1,20 +1,22 @@
 import React from "react";
-import { Film } from "@/types";
+import type { Film } from "@/types";
+import { useFilms } from "@/hooks";
 import "./Home.scss";
 
 export const Home: React.FC<{ films: { results: Film[] } }> = ({ films }) => {
-  const popFilms = films.results?.map((film) => (
-    <div key={film.id}>
-      <h1>This should be a film</h1>
-      <img src={film.poster_path ?? ""} alt={film.title}></img>
-      <h3>{film.title}</h3>
-    </div>
-  ));
+  const { films: movies, loading, error } = useFilms("popular", films);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="page">
       <h1>Home</h1>
-      {popFilms}
+      {/* {popFilms} */}
     </div>
   );
 };

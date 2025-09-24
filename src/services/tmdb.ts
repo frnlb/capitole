@@ -12,7 +12,7 @@ const options = {
 };
 
 export const filmsService = {
-  getFilms: async (category: FilmCategory = BASE_CATEGORY) => {
+  getFilmsByCategory: async (category: FilmCategory = BASE_CATEGORY) => {
     try {
       const response = await fetch(`${BASE_URL}/${category}`, options);
       if (!response.ok) {
@@ -40,4 +40,22 @@ export const filmsService = {
       throw error;
     }
   },
+};
+
+export const getFilms = async () => {
+  try {
+    const [popularFilms, topRatedFilms, upcomingFilms] = await Promise.all([
+      filmsService.getFilmsByCategory("popular"),
+      filmsService.getFilmsByCategory("top_rated"),
+      filmsService.getFilmsByCategory("upcoming"),
+    ]);
+    return {
+      popularFilms,
+      topRatedFilms,
+      upcomingFilms,
+    };
+  } catch (error) {
+    console.error("Failed to get all films ", error);
+    throw error;
+  }
 };
