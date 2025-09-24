@@ -5,6 +5,7 @@ import "./Home.scss";
 
 export const Home: React.FC<{ films: { results: Film[] } }> = ({ films }) => {
   const { films: movies, loading, error } = useFilms("popular", films);
+  console.log("🚀 ~ Home ~ movies:", movies);
   if (loading) {
     return <div>Loading...</div>;
   }
