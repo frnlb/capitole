@@ -1,18 +1,35 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
-import { filmsService } from "./services";
+import { getFilms } from "./services";
 import App from "./App";
 
-export type SsrData = {
-  films: Awaited<ReturnType<typeof filmsService.getFilmsByCategory>>;
+export type ServerData = {
+  [key: string]: any;
+};
+
+const fetchInitialData = async (_url: string): Promise<ServerData> => {
+  try {
+    const films = await getFilms();
+    return {
+      films: films,
+    };
+  } catch (error) {
+    console.error("Failed to fetch initial data:", error);
+    return {
+      films: {
+        popularFilms: { results: [] },
+        topRatedFilms: { results: [] },
+        upcomingFilms: { results: [] },
+      },
+    };
+  }
 };
 
 export async function render(
   _url: string
-): Promise<{ html: string; data: SsrData }> {
+): Promise<{ html: string; data: ServerData }> {
   try {
-    const films = await filmsService.getFilmsByCategory();
-    const data: SsrData = { films };
+    const data = await fetchInitialData(_url);
 
     const html = renderToString(
       <StrictMode>
