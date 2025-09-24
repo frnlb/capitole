@@ -42,7 +42,6 @@ app.use("*all", async (req, res) => {
     /** @type {import('./src/entry-server.ts').render} */
     let render;
     if (!isProduction) {
-      // Always read fresh template in development
       template = await fs.readFile("./index.html", "utf-8");
       template = await vite.transformIndexHtml(url, template);
       render = (await vite.ssrLoadModule("/src/entry-server.tsx")).render;
@@ -53,9 +52,13 @@ app.use("*all", async (req, res) => {
 
     const rendered = await render(url);
 
+    const hydratedScript = `<script>window.__INITIAL_DATA__= ${JSON.stringify(
+      rendered.data
+    )};</script>`;
+
     const html = template
       .replace(`<!--app-head-->`, rendered.head ?? "")
-      .replace(`<!--app-html-->`, rendered.html ?? "");
+      .replace(`<!--app-html-->`, `${rendered.html ?? ""}${hydratedScript}`);
 
     res.status(200).set({ "Content-Type": "text/html" }).send(html);
   } catch (e) {

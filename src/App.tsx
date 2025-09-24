@@ -1,11 +1,12 @@
 import "./App.scss";
 import { Home } from "@/pages";
 import { Layout } from "@/components";
+import { SsrData } from "./entry-server";
 
-function App() {
+function App({ initialData }: { initialData?: SsrData }) {
   return (
     <Layout>
-      <Home />
+      <Home films={initialData?.films} />
     </Layout>
   );
 }
