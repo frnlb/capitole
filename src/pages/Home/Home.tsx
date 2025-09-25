@@ -1,11 +1,12 @@
-import { useDataStore } from "@/store/films";
+import { useFilmsStore } from "@/store/films";
 import "./Home.scss";
 
 export const IMAGE_URL = "https://image.tmdb.org/t/p/w200";
 
 export const Home: React.FC = () => {
-  const allFilms = useDataStore((state) => state.films);
-  console.log("🚀 ~ Home ~ allFilms:", allFilms);
+  const getAllData = useFilmsStore((state) => state.getAllData);
+  const data = getAllData();
+  console.log("🚀 ~ Home ~ data:", data);
 
   return (
     <div className="page home-page">
