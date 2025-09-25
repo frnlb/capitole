@@ -13,12 +13,13 @@ function App({ initialData }: { initialData?: SsrData }) {
   }
 
   return (
-    <Routes>
-      <Layout>
+    <Layout>
+      <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/film/:filmId" element={<FilmDetail />} />
-      </Layout>
-    </Routes>
+        <Route path="/details/:filmId" element={<FilmDetail />} />
+        <Route path="*" element={<div>404 Page Not Found</div>} />
+      </Routes>
+    </Layout>
   );
 }
 
