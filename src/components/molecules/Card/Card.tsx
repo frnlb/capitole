@@ -1,39 +1,48 @@
+import React from "react";
+import "./Card.scss";
 import { Link } from "react-router-dom";
-import { Film, FilmCategory } from "@/types";
 
-import "./FilmCard.scss";
-
-interface FilmCardProps {
-  film: Film;
-  category: FilmCategory;
+interface CardProps {
+  title?: string;
+  imageUrl?: string;
+  description?: string;
+  link?: string;
 }
 
-export const FilmCard: React.FC<FilmCardProps> = ({ film, category }) => {
-  const posterUrl = film.poster_path
-    ? `${TMDB_IMAGE_BASE_URL}${film.poster_path}`
-    : "/placeholder-poster.jpg";
+export const Card: React.FC<CardProps> = ({
+  title,
+  imageUrl,
+  description,
+  link,
+}) => {
+  if (!title && !imageUrl && !description) {
+    return null;
+  }
 
-  return (
-    <div className={`film-card film-card--${category}`}>
-      <Link
-        to={`/film/${film.id}?category=${category}`}
-        className="film-card__link"
-      >
-        <div className="film-card__image">
-          <img src={posterUrl} alt={film.title} loading="lazy" />
+  const cardContent = (
+    <>
+      {imageUrl && (
+        <div className="card__image-container">
+          <img
+            src={imageUrl}
+            alt={title || "Card image"}
+            className="card__image"
+          />
+          {title && <h2 className="card__title-overlay">{title}</h2>}
         </div>
-        <div className="film-card__content">
-          <h3 className="film-card__title">{film.title}</h3>
-          <div className="film-card__meta">
-            <span className="film-card__rating">
-              ★ {film.vote_average.toFixed(1)}
-            </span>
-            <span className="film-card__year">
-              {new Date(film.release_date).getFullYear()}
-            </span>
-          </div>
-        </div>
-      </Link>
-    </div>
+      )}
+      {description && <p className="card__description">{description}</p>}
+      {!imageUrl && title && <h2 className="card__title">{title}</h2>}
+    </>
   );
+
+  if (link) {
+    return (
+      <Link to={link} className="card">
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return <div className="card">{cardContent}</div>;
 };

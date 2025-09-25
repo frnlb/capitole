@@ -1,1 +1,7 @@
 @use "./styles/variables.scss";
+
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
