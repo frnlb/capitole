@@ -1,10 +1,15 @@
-import App from "@/App";
-import { Home } from "@/pages";
+import { getFilms } from "@/services";
 
-export const routes = [
+export interface RouteConfig {
+  path: string;
+  loader: (params?: Record<string, string>) => Promise<any>;
+  dataKey: string;
+}
+
+export const serverRoutes: RouteConfig[] = [
   {
     path: "/",
-    component: Home,
-    exact: true,
+    loader: getFilms,
+    dataKey: "filmData",
   },
 ];

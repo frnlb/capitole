@@ -1,4 +1,4 @@
-import type { Film, FilmCategory } from "@/types";
+import type { FilmCategory } from "@/types";
 const BASE_URL = import.meta.env.VITE_API_URL;
 const TOKEN = import.meta.env.VITE_READ_ACCESS_TOKEN;
 const BASE_CATEGORY: FilmCategory = "popular";
