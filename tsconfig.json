@@ -29,7 +29,8 @@
       "@utils/*": ["./src/utils/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@services/*": ["./src/services/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@store/*": ["./src/store/*"]
     }
   },
   "include": ["src", "custom.d.ts"],
