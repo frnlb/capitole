@@ -1,4 +1,4 @@
-import type { FilmData } from "@/types";
+import type { FilmData, Genre } from "@/types";
 
 export const genreMapper = (genres: Genre[], filmGenres: number[]) => {
   return filmGenres.map((filmId) => {

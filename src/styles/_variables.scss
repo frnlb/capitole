@@ -1,3 +1,27 @@
+@use "./functions.scss";
+
+$genre-id-map: (
+  "action": 28,
+  "adventure": 12,
+  "animation": 16,
+  "comedy": 35,
+  "crime": 80,
+  "documentary": 99,
+  "drama": 18,
+  "family": 10751,
+  "fantasy": 14,
+  "history": 36,
+  "horror": 27,
+  "music": 10402,
+  "mystery": 9648,
+  "romance": 10749,
+  "science-fiction": 878,
+  "tv-movie": 10770,
+  "thriller": 53,
+  "war": 10752,
+  "western": 37
+);
+
 :root {
   // Colors
   --color-primary: #1a1a1a;
@@ -34,6 +58,10 @@
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 300ms ease-in-out;
   --transition-slow: 500ms ease-in-out;
+
+  @each $name, $id in $genre-id-map {
+    --color-genre-#{$name}: #{functions.genre-color($id)};
+  }
 }
 
 // Breakpoints

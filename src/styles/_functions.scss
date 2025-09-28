@@ -1,0 +1,7 @@
+@function genre-color($genre-id) {
+  $normalized-id: $genre-id / 1000;
+  $hue: $genre-id % 360; 
+  $saturation: 70%;
+  $lightness: 50%; 
+  @return hsl($hue, $saturation, $lightness);
+}
