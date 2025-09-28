@@ -4,6 +4,7 @@
 
 @include mixins.generate-color-styles(var.$colors);
 @include mixins.generate-font-family(var.$font-families);
+@include mixins.generate-genre-color-styles(var.$genre-id-map); 
 
 *,
 *::before,

@@ -30,7 +30,6 @@ export const Typography = ({
   const fontStyle = fontFamily ? `font-${fontFamily}`:  "";
   const stylesArray: string[] = [variant, textStyle, textWeight, colorStyle, fontStyle];
   const styles = stylesArray.join(" ");
-  console.log("🚀 ~ Typography ~ styles:", styles)
   return React.createElement(
     tag,
     {

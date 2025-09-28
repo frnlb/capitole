@@ -1,52 +1,45 @@
-// src/components/Carousel/Carousel.scss
+$card-width-rem: 18rem; 
+$animation-duration: 40s; 
+
+@keyframes slide-continuous {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
 
 .carousel {
-  position: relative; // Needed to position the controls.
+  position: relative;
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto; // Centers the carousel on the page.
-  overflow: hidden; // Hides content outside the carousel's bounds.
+  max-width: 54rem; 
+  margin: var(--spacing-xl) auto;
+  overflow: hidden;
+  
+  &--paused &__content-wrapper {
+    animation-play-state: paused !important;
+  }
 
-  // Set the container for the content.
-  // We'll use flexbox to manage the single item display.
   &__content-wrapper {
     display: flex;
-    justify-content: center; // Center the content horizontally.
-    align-items: center; // Center the content vertically.
-    // The width should be the width of a single item, in our case the Card.
-    // Since our Card has a max-width of 300px, we'll set it here to be consistent.
-    width: 300px;
-    margin: 0 auto;
+    width: 200%;
+    margin: 0; 
+    animation-name: slide-continuous;
+    animation-duration: $animation-duration;
+    animation-timing-function: linear; 
+    animation-iteration-count: infinite;     
+    will-change: transform; 
   }
 
-  // Styles for the navigation controls.
+  &__content-wrapper > * {
+    flex-shrink: 0;
+    flex-basis: 18rem; 
+    max-width: 18rem;
+  }
+
   &__controls {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%); // Vertically center the controls.
-    display: flex;
-    justify-content: space-between; // Places buttons at the far left and right.
-    padding: 0 10px;
+    display: none;
   }
 
-  // Styles for the individual buttons.
-  &__button {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 50%; // Makes the buttons circular.
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-
-    // Hover effect for the buttons.
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-  }
 }
