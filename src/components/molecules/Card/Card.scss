@@ -1,22 +1,32 @@
 $card-border-radius: 8px;
 $card-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-$text-color: #333;
-$title-overlay-color: #fff;
 $title-overlay-background: rgba(0, 0, 0, 0.5);
 
 .card {
   display: block;
-  width: 100%;
-  max-width: 300px;
+  position: relative;
+  height: 18rem;
+  width: 18rem;
+  border: 2px solid blue;
   border-radius: $card-border-radius;
   box-shadow: $card-box-shadow;
   overflow: hidden;
   text-decoration: none;
-  color: $text-color;
   transition: transform 0.2s ease-in-out;
 
   &:hover {
     transform: translateY(-5px);
+  }
+
+  &:hover &__description-container {
+    display: flex;
+    opacity: 1;
+  }
+
+  &:hover &__title,
+  &:hover &__title-overlay {
+    display: hidden;
+    opacity: 0;
   }
 
   &[href] {
@@ -24,49 +34,36 @@ $title-overlay-background: rgba(0, 0, 0, 0.5);
   }
 
   &__image-container {
-    position: relative;
     width: 100%;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
   }
 
   &__image {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  &__title {
-    padding: 1rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: $text-color;
+    left: 50%;
+    transform: translate(-50%);
+    object-fit: contain;
   }
 
   &__title-overlay {
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 0.5rem 1rem;
+    padding: var(--spacing-sm);
     background-color: $title-overlay-background;
-    color: $title-overlay-color;
-    font-size: 1.2rem;
-    font-weight: bold;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
 
-  &__description {
+  &__description-container {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    bottom: 0;
     padding: 1rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: $text-color;
+    background-color: rgba(0, 0, 0, 0.555);
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   }
 }

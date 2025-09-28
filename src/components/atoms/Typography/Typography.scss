@@ -1,0 +1,31 @@
+.default {
+  color: var(--color-text);
+}
+
+.primary {
+  color: var(--color-popular);
+}
+
+.secondary {
+  color: var(--color-top-rated);
+}
+
+.tertiary {
+  color: var(--color-upcoming);
+}
+
+.normal {
+  font-style: normal;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.thin {
+  font-weight: 300;
+}

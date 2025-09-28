@@ -36,3 +36,10 @@ export interface ProductionCompany {
 }
 
 export type FilmCategory = "popular" | "top_rated" | "upcoming";
+
+export interface FilmData {
+  genres: Genre[];
+  popularFilms: Film[];
+  topRatedFilms: Film[];
+  upcomingFilms: Film[];
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import "./Card.scss";
 import { Link } from "react-router-dom";
+import { Typography } from "@/components";
 
 interface CardProps {
   title?: string;
@@ -28,11 +29,21 @@ export const Card: React.FC<CardProps> = ({
             alt={title || "Card image"}
             className="card__image"
           />
-          {title && <h2 className="card__title-overlay">{title}</h2>}
+          {title && (
+            <div className="card__title-container">
+              <Typography tag="h3">{title}</Typography>
+            </div>
+          )}
         </div>
       )}
-      {description && <p className="card__description">{description}</p>}
-      {!imageUrl && title && <h2 className="card__title">{title}</h2>}
+      {description && (
+        <div className="card__description-container">
+          <Typography tag="p" color="text">
+            {description}
+          </Typography>
+        </div>
+      )}
+      {!imageUrl && title && <Typography tag="h3">{title}</Typography>}
     </>
   );
 

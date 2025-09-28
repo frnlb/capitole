@@ -1,0 +1,21 @@
+@mixin generate-color-styles($color-map) {
+  :root {
+    @each $name, $value in $color-map {
+      --color-#{$name}: #{$value};
+    }
+  }
+
+  @each $name, $value in $color-map {
+    .color-#{$name} {
+      color: var(--color-#{$name});
+    }
+
+    .background-#{$name} {
+      background-color: var(--color-#{$name});
+    }
+
+    .border-#{$name} {
+      border-color: var(--color-#{$name});
+    }
+  }
+}
