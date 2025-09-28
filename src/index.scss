@@ -1,5 +1,9 @@
 @use "./styles/variables.scss" as var;
 @use "./styles/fonts.scss";
+@use "./styles/mixins.scss";
+
+@include mixins.generate-color-styles(var.$colors);
+@include mixins.generate-font-family(var.$font-families);
 
 *,
 *::before,

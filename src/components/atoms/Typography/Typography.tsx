@@ -1,9 +1,11 @@
 import React from "react";
 import { Colors } from "@/types";
+import "./Typography.scss";
 export type TextTag = "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span";
 export type TextStyle = "normal" | "italic" | "label" | "bold";
 export type TextWeight = "bold" | "thin" | "normal";
 export type Variant = "default" | "primary" | "secondary" | "tertiary";
+export type FontFamily = "default" | "primary" | "secondary" | "tertiary";
 
 export interface TypographyProps {
   tag?: TextTag;
@@ -12,6 +14,7 @@ export interface TypographyProps {
   children: string;
   textWeight?: TextWeight;
   variant?: Variant;
+  fontFamily?: FontFamily;
 }
 
 export const Typography = ({
@@ -20,9 +23,14 @@ export const Typography = ({
   textStyle = "normal",
   textWeight = "normal",
   variant = "default",
+  fontFamily,
+  color
 }: TypographyProps) => {
-  const stylesArray: string[] = [variant, textStyle, textWeight];
+  const colorStyle = color ? `text-color-${color}` : "";
+  const fontStyle = fontFamily ? `font-${fontFamily}`:  "";
+  const stylesArray: string[] = [variant, textStyle, textWeight, colorStyle, fontStyle];
   const styles = stylesArray.join(" ");
+  console.log("🚀 ~ Typography ~ styles:", styles)
   return React.createElement(
     tag,
     {

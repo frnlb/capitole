@@ -1,12 +1,6 @@
-@mixin generate-color-styles($color-map) {
-  :root {
-    @each $name, $value in $color-map {
-      --color-#{$name}: #{$value};
-    }
-  }
-
-  @each $name, $value in $color-map {
-    .color-#{$name} {
+@mixin generate-color-styles($colors) {
+  @each $name, $value in $colors {
+    .text-color-#{$name} {
       color: var(--color-#{$name});
     }
 
@@ -16,6 +10,14 @@
 
     .border-#{$name} {
       border-color: var(--color-#{$name});
+    }
+  }
+}
+
+@mixin generate-font-family($font-families) {
+  @each $name, $value in $font-families {
+    .font-#{$name} {
+      font-family: $value;
     }
   }
 }

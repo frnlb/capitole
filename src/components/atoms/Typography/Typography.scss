@@ -1,17 +1,22 @@
+@use "../../../styles/variables" as var;
+
 .default {
   color: var(--color-text);
 }
 
 .primary {
   color: var(--color-popular);
+  font-family: var.$font-primary;
 }
 
 .secondary {
   color: var(--color-top-rated);
+  font-family: var.$font-secondary;
 }
 
 .tertiary {
   color: var(--color-upcoming);
+  font-family: var.$font-tertiary;
 }
 
 .normal {

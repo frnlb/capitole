@@ -43,23 +43,42 @@ $breakpoint-lg: 1024px;
 $breakpoint-xl: 1280px;
 
 // Fonts
-$font-default: "Arvo", sans-serif;
-$font-primary: "Baloo Bhaina 2", sans-serif;
+$font-default: "Arvo", Roboto, serif;
+$font-primary: "Baloo Bhaina 2", serif;
 $font-secondary: "Averia Serif Libre", serif;
 $font-tertiary: "Architects Daughter", Helvetica, serif;
+
+$font-families: (
+  "default": $font-default,
+  "primary": $font-primary,
+  "secondary": $font-secondary,
+  "tertiary": $font-tertiary,
+);
 
 $base-font-size: 1rem;
 $font-sizes: (
   "sm": $base-font-size * 0.75,
   "base": $base-font-size,
   "lg": $base-font-size * 1.125,
-
   "h6": $base-font-size * 1.25,
   "h5": $base-font-size * 1.5,
   "h4": $base-font-size * 1.875,
   "h3": $base-font-size * 2.25,
   "h2": $base-font-size * 3,
   "h1": $base-font-size * 4,
+);
+
+$colors: (
+  "primary": var(--color-primary),
+  "secondary": var(--color-secondary),
+  "accent": var(--color-accent),
+  "text": var(--color-text),
+  "text-secondary": var(--color-text-secondary),
+  "background": var(--color-background),
+  "surface": var(--color-surface),
+  "popular": var(--color-popular),
+  "top-rated": var(--color-top-rated),
+  "upcoming": var(--color-upcoming),
 );
 
 $line-heights: (

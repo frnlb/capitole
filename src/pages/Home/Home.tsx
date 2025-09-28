@@ -41,6 +41,7 @@ export const Home: React.FC = () => {
   return (
     <div className="page">
       <Typography tag="h1">Popular Movies</Typography>
+
       <div className="carousel-section">{display}</div>
     </div>
   );
