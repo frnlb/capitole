@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import React, { useState, ReactNode, Children, ReactElement, } from "react";
 import "./Carousel.scss";
 
 interface CarouselProps {
@@ -8,13 +8,21 @@ interface CarouselProps {
 export const Carousel: React.FC<CarouselProps> = ({ children }) => {
   const [isPaused, setIsPaused] = useState(false);
 
-  const totalItems = children.length;
+  const totalItems = Children.count(children);
 
   if (totalItems === 0) {
     return null;
   }
 
-  const doubledChildren = [...children, ...children];
+  const originalChildren = Children.toArray(children) as ReactElement[];
+
+  const clonedChildren = Children.map(originalChildren, (child: ReactElement, index) => {
+    const originalKey = child.key || `carousel-item-${index}`;
+    const newKey = `${originalKey}-clone`;
+    return React.cloneElement(child, { key: newKey });
+  });
+
+  const doubledChildren = [...originalChildren, ...clonedChildren];
 
   const handleMouseEnter = () => setIsPaused(true);
   const handleMouseLeave = () => setIsPaused(false);
