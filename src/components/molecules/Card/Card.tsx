@@ -9,6 +9,7 @@ interface CardProps {
   description?: string;
   link?: string;
   genre?: string;
+  category?: string;
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -16,13 +17,15 @@ export const Card: React.FC<CardProps> = ({
   imageUrl,
   description,
   link,
-  genre
+  genre,
+  category
 }) => {
   if (!title && !imageUrl && !description) {
     return null;
   }
 
   const colorStyle = genre ? ` border-genre-${genre}` : {};
+  console.log("🚀 ~ category:", category)
   
 
   const cardContent = (
@@ -52,9 +55,14 @@ export const Card: React.FC<CardProps> = ({
     </>
   );
 
+  const stateData = { filmCategory: category };
+
   if (link) {
     return (
-      <Link to={link} className={`card ${colorStyle}`}>
+      <Link to={link} className={`card ${colorStyle}`}
+        state={stateData
+        }
+      >
         {cardContent}
       </Link>
     );

@@ -25,12 +25,15 @@ interface FilmsState {
   setFilmsData: (filmsData: FilmData) => void;
 
   getFilmById: (id: number) => Film | undefined;
+  
   getAllData: () => {
     genres: Genre[];
     popularFilms: Film[];
     topRatedFilms: Film[];
     upcomingFilms: Film[];
   };
+
+  getGenres: () => { genres: Genre[]};
 }
 
 export const useFilmsStore = create<FilmsState>((set, get) => ({
@@ -68,4 +71,9 @@ export const useFilmsStore = create<FilmsState>((set, get) => ({
       upcomingFilms: state.upcomingFilms,
     };
   },
+
+  getGenres: () => {
+    const state = get();
+    return {genres: state.genres};
+  }
 }));

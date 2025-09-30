@@ -14,7 +14,7 @@ export const Home: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  const display = Object.entries(data).map(([key, value]) => {
+  const display = Object.entries(data).map(([key, value], index) => {
     if(key !=="genres") {
       const carouselItems = value.map((film) => {
         const {
@@ -31,8 +31,9 @@ export const Home: React.FC = () => {
         title={title}
         imageUrl={`${IMAGE_URL}${poster_path}`}
         link={`${LINK_TO}${id}`}
-        key={id}
+        key={`${id}-${key}-${index}`}
         genre={genreMapper(data.genres, genre_ids)[0].toLocaleLowerCase().replace(/ /g, "-")}
+        category={key}
       />
     );
     });

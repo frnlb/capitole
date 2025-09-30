@@ -2,11 +2,17 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFilmsStore } from "@store/films";
 import { Film } from "@/types";
-import { Typography } from "@/components";
+import { Typography, DescriptionArea } from "@/components";
+import { genreMapper } from "@/helpers";
+import { useLocation } from "react-router-dom";
 
 export const FilmDetail = () => {
+  const location = useLocation ();
+  console.log("🚀 ~ FilmDetail ~ location:", location);
   const isHydrated = useFilmsStore((state) => state.isHydrated);
   const getFilmById = useFilmsStore((state) => state.getFilmById);
+  const getGenres = useFilmsStore((state) => state.getGenres);
+  const genresData = getGenres();
 
   const [film, setFilm] = useState<Film | undefined>(undefined);
 
@@ -32,10 +38,17 @@ export const FilmDetail = () => {
     return <div className="p-8">Film not found.</div>;
   }
 
+  const genre = genreMapper(genresData.genres, film.genre_ids)[0];
+  console.log("🚀 ~ FilmDetail ~ genre:", genre);
+  const colorStyles = `bg-${genre.toLocaleLowerCase().replace(/ /g, "-")}`;
+
   return (
-    <div className="page">
+    <div className={`page-detail ${colorStyles}`}>
       <Typography>{film.title}</Typography>
       <Typography>{`ID: ${film.id.toString()}`}</Typography>
+
+      <DescriptionArea>
+
 
       <img
         src={
@@ -51,15 +64,18 @@ export const FilmDetail = () => {
         }}
       />
 
+
       <Typography>{film.overview}</Typography>
       <div>
-        <p>
-          Release Date: <Typography>{film.release_date}</Typography>
-        </p>
-        <p>
-          Vote Average: <Typography>{film.vote_average.toFixed(1)}</Typography>
-        </p>
+
+          <Typography >Release Date:  {film.release_date}</Typography>
+
+
+           <Typography>Vote Average: {film.vote_average.toFixed(1)}</Typography>
+
       </div>
+      </DescriptionArea>
+
     </div>
   );
 };

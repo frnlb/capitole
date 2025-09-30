@@ -1,0 +1,9 @@
+@use "../../../styles/variables.scss" as vars;
+
+.description-area {
+    display: flex;
+    padding: var(--spacing-md);
+    height: calc(vars.$card-height + var(--spacing-md) * 2);
+    margin: var(--spacing-xl) 0;
+    border: 2px solid blue;
+}
