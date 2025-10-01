@@ -16,7 +16,7 @@ Routing: Client-side routing handled by React Router DOM.
 
 npm install
 
-2. Development Mode (Vite HMR + Express SSR)
+2. Development Mode (Vite HMR + Express SSR) - Run in development mode!!
    npm run dev
 
 Access: Navigate to http://localhost:5173
