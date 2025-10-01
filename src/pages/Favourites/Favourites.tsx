@@ -1,6 +1,6 @@
 import { useFilmsStore } from "@/store/films";
 import { useWishlistStore } from "@/store/wishlist";
-import { Card, Carousel } from "@/components";
+import { Card } from "@/components";
 import { genreMapper, IMAGE_URL, LINK_TO } from "@/helpers";
 import { Film } from "@/types";
 import "./Favourites.scss";
@@ -14,7 +14,7 @@ export const Favourites: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  const carouselItems = favourites.map((film, index) => {
+  const cards = favourites.map((film, index) => {
     const { genre_ids, id, overview, poster_path, title } = film as Film;
     return (
       <Card
@@ -32,9 +32,7 @@ export const Favourites: React.FC = () => {
 
   return (
     <div className="page">
-      <div className="carousel-section">
-        <Carousel>{carouselItems}</Carousel>
-      </div>
+      <div className="carousel-section">{cards}</div>
     </div>
   );
 };

@@ -1,15 +1,26 @@
-import { Link } from "react-router-dom";
-import './Header.scss';
-export interface HeaderProps {
-    headerLinks: {name: string, path: string}[]
-}
-const Header = ({headerLinks}: HeaderProps) => {
-    const displayHeaderLinks = headerLinks.map((link) => (
-        <Link to={link.path} key={link.name}>{link.name}</Link>
-    ))
+import { Link, useLocation } from "react-router-dom";
+import { Typography } from "@/components";
+import "./Header.scss";
+
+export function Header() {
+  const location = useLocation();
+  console.log("🚀 ~ Header ~ location:", location);
   return (
-    <header className="header"></header>
-  )
+    <header className="header">
+      <nav>
+        <Link to="/" className="header-link">
+          <Typography tag="p" color="inherit">
+            Home
+          </Typography>
+        </Link>
+        <Link to="/favourites" className="header-link">
+          <Typography color="inherit" tag="p">
+            Favourites
+          </Typography>
+        </Link>
+      </nav>
+    </header>
+  );
 }
 
-export default Header
+export default Header;
