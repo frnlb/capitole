@@ -1,3 +1,3 @@
 export * from "./Layout";
-export * from "./DescriptionArea";
+export * from "./DisplayWrapper";
 export * from "./Layout";

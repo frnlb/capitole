@@ -15,6 +15,7 @@ export const Home: React.FC = () => {
   }
 
   const display = Object.entries(data).map(([key, value], index) => {
+    console.log("🚀 ~ Home ~ key:", key)
     if(key !=="genres") {
       const carouselItems = value.map((film) => {
         const {

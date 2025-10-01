@@ -2,22 +2,28 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFilmsStore } from "@store/films";
 import { Film } from "@/types";
-import { Typography, DescriptionArea } from "@/components";
+import { Typography, DisplayWrapper, Button, IconComponent } from "@/components";
 import { genreMapper } from "@/helpers";
 import { useLocation } from "react-router-dom";
+import { useWishlist } from "@/hooks";
+import "./FilmDetail.scss";
 
 export const FilmDetail = () => {
   const location = useLocation ();
-  console.log("🚀 ~ FilmDetail ~ location:", location);
+  const { addToWishlist, removeFromWishlist, isInWishlist} = useWishlist();
   const isHydrated = useFilmsStore((state) => state.isHydrated);
   const getFilmById = useFilmsStore((state) => state.getFilmById);
   const getGenres = useFilmsStore((state) => state.getGenres);
   const genresData = getGenres();
+  const {filmCategory} = location.state;
+  console.log("🚀 ~ FilmDetail ~ filmCategory:", filmCategory);
+
 
   const [film, setFilm] = useState<Film | undefined>(undefined);
 
   const { id } = useParams<{ id: string }>();
   const filmId = id ? parseInt(id, 10) : undefined;
+  console.log("🚀 ~ FilmDetail ~ filmId:", filmId);
 
   useEffect(() => {
     if (isHydrated && filmId !== undefined) {
@@ -39,7 +45,6 @@ export const FilmDetail = () => {
   }
 
   const genre = genreMapper(genresData.genres, film.genre_ids)[0];
-  console.log("🚀 ~ FilmDetail ~ genre:", genre);
   const colorStyles = `bg-${genre.toLocaleLowerCase().replace(/ /g, "-")}`;
 
   return (
@@ -47,34 +52,50 @@ export const FilmDetail = () => {
       <Typography>{film.title}</Typography>
       <Typography>{`ID: ${film.id.toString()}`}</Typography>
 
-      <DescriptionArea>
-
+      <DisplayWrapper>
+        <div>
 
       <img
+        loading="lazy"
         src={
           film.poster_path
             ? `https://image.tmdb.org/t/p/w500${film.poster_path}`
             : "https://placehold.co/500x750/333/FFF?text=No+Image"
         }
         alt={film.title}
-        className=""
+        className="film-detail-image"
         onError={(e) => {
           e.currentTarget.src =
             "https://placehold.co/500x750/333/FFF?text=Image+Error";
         }}
       />
-
-
+        </div>
+        <div>
+          {
+            isInWishlist(filmId!) ?
+            <Button variant="icon" icon={"heart"} onClick={()=>removeFromWishlist(filmId!)}/>
+            :
+            <Button variant="icon" icon={"heart"} onClick={()=>addToWishlist(film)}/>
+          }
+      <Typography tag="h1" >{film.title}</Typography>
       <Typography>{film.overview}</Typography>
+      <IconComponent name="heart" alt={"want"}/>
+
+        </div>
+
+
       <div>
 
-          <Typography >Release Date:  {film.release_date}</Typography>
+          <Typography tag="p">Release Date:  {film.release_date}</Typography>
+          {film.adult && <Typography tag="p">Adult: Yes</Typography>}
+          <Typography tag="p">Release Date:  {film.release_date}</Typography>
+          <Typography tag="p">Release Date:  {film.release_date}</Typography>
 
 
-           <Typography>Vote Average: {film.vote_average.toFixed(1)}</Typography>
+           <Typography tag="p">Vote Average: {film.vote_average.toFixed(1)}</Typography>
 
       </div>
-      </DescriptionArea>
+      </DisplayWrapper>
 
     </div>
   );

@@ -1,7 +1,9 @@
-import "./DescriptionArea.scss"
+import "./DescriptionArea.scss";
 
-export const DescriptionArea = ({children}: {children:React.ReactNode[]}) => {
+const DescriptionArea = () => {
   return (
-    <div className="description-area">{children}</div>
+    <div>DescriptionArea</div>
   )
-};
+}
+
+export default DescriptionArea;

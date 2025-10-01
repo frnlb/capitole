@@ -7,7 +7,7 @@ export type ContainerShape = "square" | "rounded" | "circle" | "pill";
 export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   children?: React.ReactNode | React.ReactNode[];
   label?: string; //typography;
-  variant?: string | "icon"; // variant;
+  variant?: string | "icon" | "base";
   type?: ButtonType;
   shape?: ContainerShape;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -27,9 +27,14 @@ export const Button = ({
   icon,
   ...rest
 }: ButtonProps) => {
+  const buttonStyles: Record<typeof variant, string>= {
+    base: "button_base",
+    icon: "button_icon"
+  }
+  
   return (
     <button
-      className={"button"}
+      className={buttonStyles[variant]}
       type={type}
       onClick={type !== "submit" ? onClick : undefined}
       onMouseEnter={onMouseEnter}

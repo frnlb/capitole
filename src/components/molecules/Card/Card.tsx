@@ -25,8 +25,6 @@ export const Card: React.FC<CardProps> = ({
   }
 
   const colorStyle = genre ? ` border-genre-${genre}` : {};
-  console.log("🚀 ~ category:", category)
-  
 
   const cardContent = (
     <>

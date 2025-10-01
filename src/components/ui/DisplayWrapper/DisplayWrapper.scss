@@ -1,0 +1,10 @@
+@use "../../../styles/variables.scss" as vars;
+
+.description-area {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    height: calc(vars.$card-height * 2 + var(--spacing-xl));
+    margin: var(--spacing-xl) 0;
+    gap: var(--spacing-xl);
+}
+
