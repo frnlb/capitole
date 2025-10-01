@@ -1,0 +1,17 @@
+.additional-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+.genres-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.genres-wrapper > .genres {
+  display: inline-flex;
+  gap: var(--spacing-md);
+}

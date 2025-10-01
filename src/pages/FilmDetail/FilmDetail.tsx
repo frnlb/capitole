@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { Typography, DisplayWrapper, Button } from "@/components";
+import {
+  Typography,
+  DisplayWrapper,
+  Button,
+  FilmAdditionalInfo,
+} from "@/components";
 import { useFilmsStore } from "@store/films";
 import { genreMapper } from "@/helpers";
 import { useWishlist } from "@/hooks";
@@ -99,17 +104,7 @@ export const FilmDetail = () => {
           <Typography>{film.overview}</Typography>
         </div>
 
-        <div className="detail-additional-info">
-          <Typography>{film.title}</Typography>
-          <Typography>{`ID: ${film.id.toString()}`}</Typography>
-          <Typography tag="p">Release Date: {film.release_date}</Typography>
-          {film.adult && <Typography tag="p">Adult: Yes</Typography>}
-          <Typography tag="h4">Genres: </Typography>
-          {genres && genres}
-          <Typography tag="p">
-            Vote Average: {film.vote_average.toFixed(1)}
-          </Typography>
-        </div>
+        <FilmAdditionalInfo film={film} genres={genres} />
       </DisplayWrapper>
     </div>
   );
