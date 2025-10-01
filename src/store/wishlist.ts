@@ -8,6 +8,7 @@ interface WishlistState {
   removeFromWishlist: (filmId: number) => void;
   isInWishlist: (filmId: number) => boolean;
   clearWishlist: () => void;
+  getWishlistItems: () => Film[];
 }
 
 export const useWishlistStore = create<WishlistState>()(
@@ -26,6 +27,7 @@ export const useWishlistStore = create<WishlistState>()(
         })),
       isInWishlist: (filmId) => get().items.some((item) => item.id === filmId),
       clearWishlist: () => set({ items: [] }),
+      getWishlistItems: () => get().items,
     }),
     {
       name: "film-wishlist",
