@@ -43,3 +43,5 @@ export interface FilmData {
   topRatedFilms: Film[];
   upcomingFilms: Film[];
 }
+
+export type FilmCategories = "popularFilms" | "topRatedFilms" | "upcomingFilms";

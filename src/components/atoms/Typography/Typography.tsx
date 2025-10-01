@@ -11,7 +11,7 @@ export interface TypographyProps {
   tag?: TextTag;
   textStyle?: TextStyle;
   color?: Colors;
-  children: string;
+  children: string | React.ReactNode;
   textWeight?: TextWeight;
   variant?: Variant;
   fontFamily?: FontFamily;
@@ -24,11 +24,17 @@ export const Typography = ({
   textWeight = "normal",
   variant = "default",
   fontFamily,
-  color
+  color,
 }: TypographyProps) => {
   const colorStyle = color ? `text-color-${color}` : "";
-  const fontStyle = fontFamily ? `font-${fontFamily}`:  "";
-  const stylesArray: string[] = [variant, textStyle, textWeight, colorStyle, fontStyle];
+  const fontStyle = fontFamily ? `font-${fontFamily}` : "";
+  const stylesArray: string[] = [
+    variant,
+    textStyle,
+    textWeight,
+    colorStyle,
+    fontStyle,
+  ];
   const styles = stylesArray.join(" ");
   return React.createElement(
     tag,
