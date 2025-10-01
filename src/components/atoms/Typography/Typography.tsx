@@ -10,7 +10,7 @@ export type FontFamily = "default" | "primary" | "secondary" | "tertiary";
 export interface TypographyProps {
   tag?: TextTag;
   textStyle?: TextStyle;
-  color?: Colors;
+  color?: Colors | "inherit";
   children: string | React.ReactNode;
   textWeight?: TextWeight;
   variant?: Variant;
