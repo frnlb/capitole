@@ -2,9 +2,9 @@ import { useFilmsStore } from "@/store/films";
 import { Card, Carousel } from "@/components";
 import { genreMapper, IMAGE_URL, LINK_TO } from "@/helpers";
 import { Film } from "@/types";
-import "./Home.scss";
+import "./Favourites.scss";
 
-export const Home: React.FC = () => {
+export const Favourites: React.FC = () => {
   const getAllData = useFilmsStore((state) => state.getAllData);
   const data = getAllData();
   if (!data) {
