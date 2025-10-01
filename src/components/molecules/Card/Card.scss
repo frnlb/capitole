@@ -8,7 +8,7 @@ $title-overlay-background: rgba(0, 0, 0, 0.5);
   position: relative;
   height: vars.$card-height;
   width: vars.$card-height;
-  border-width: 6px;
+  border-width: var(--spacing-xs);
   border-style: solid;
   border-radius: $card-border-radius;
   box-shadow: $card-box-shadow;
@@ -58,6 +58,7 @@ $title-overlay-background: rgba(0, 0, 0, 0.5);
     align-items: center;
     justify-content: center;
     width: 100%;
+    z-index: 10;
   }
 
   &__description-container {

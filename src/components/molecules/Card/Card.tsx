@@ -18,7 +18,7 @@ export const Card: React.FC<CardProps> = ({
   description,
   link,
   genre,
-  category
+  category,
 }) => {
   if (!title && !imageUrl && !description) {
     return null;
@@ -36,7 +36,7 @@ export const Card: React.FC<CardProps> = ({
             className="card__image"
           />
           {title && (
-            <div className="card__title-container">
+            <div className="card__title-overlay">
               <Typography tag="h3">{title}</Typography>
             </div>
           )}
@@ -57,10 +57,7 @@ export const Card: React.FC<CardProps> = ({
 
   if (link) {
     return (
-      <Link to={link} className={`card ${colorStyle}`}
-        state={stateData
-        }
-      >
+      <Link to={link} className={`card ${colorStyle}`} state={stateData}>
         {cardContent}
       </Link>
     );
