@@ -1,65 +1,55 @@
 import Star from "@assets/star.svg?react";
 import Heart from "@assets/heart.svg?react";
+import HeartSolid from "@assets/heart-solid.svg?react";
+import HeartOutline from "@assets/heart-outline.svg?react";
 import type { Colors } from "@/types";
-import { colorMap } from "@/helpers/styles";
+import { colorMap, colorVarMap } from "@/helpers/styles";
 import "./IconComponent.scss";
+import React from "react";
 
-export type IconName = "star" | "heart";
+export type IconName = "star" | "heart" | "heart-solid" | "heart-outline";
 
-export interface SvgIconComponentProps extends React.SVGProps<SVGSVGElement> {
+interface IconComponentProps {
   name: IconName;
-  fillColor?: Colors | string;
-  strokeColor?: Colors | string;
-  width?: number;
-  height?: number;
+  fillColor?: Colors | "none";
+  strokeColor?: Colors | "none";
+  size?: number | string;
+  className?: string;
 }
 
-export interface IconComponentProps extends SvgIconComponentProps {
-  variant?: string;
-  alt: string;
-}
-
-const icons: Record<
-  IconName,
-  string | React.FC<React.SVGProps<SVGSVGElement>>
-> = {
+const iconMap = {
   star: Star,
   heart: Heart,
-};
+  "heart-solid": HeartSolid,
+  "heart-outline": HeartOutline,
+} as const;
 
 export const IconComponent: React.FC<IconComponentProps> = ({
-  variant = "base",
-  alt,
   name,
   fillColor,
   strokeColor,
-  width = 40,
-  height = 40,
-  ...props
-}: IconComponentProps) => {
-  const Icon = icons[name];
-  let iconStyle;
-  if (typeof Icon === "function") {
-    const fillColorResult =
-      fillColor && fillColor in colorMap
-        ? colorMap[fillColor as Colors]
-        : fillColor;
+  size = 24,
+  className = "",
+}) => {
+  const IconSvg = iconMap[name];
 
-    const strokeColorResult =
-      strokeColor && strokeColor in colorMap
-        ? colorMap[strokeColor as Colors]
-        : strokeColor;
+  const getColorValue = (color?: Colors | "none"): string | undefined => {
+    if (!color || color === "none") return "none";
+    return colorVarMap[color] || colorMap[color];
+  };
 
-    return (
-      <Icon
-        className={iconStyle}
-        {...props}
-        fill={fillColorResult}
-        stroke={strokeColorResult}
-        width={width}
-        height={height}
-      />
-    );
-  }
-  return <img src={icons[name] as string} className={variant} alt={alt} />;
+  const style: React.CSSProperties = {
+    width: typeof size === "number" ? `${size}px` : size,
+    height: typeof size === "number" ? `${size}px` : size,
+    ...(fillColor && { "--icon-fill": getColorValue(fillColor) } as React.CSSProperties),
+    ...(strokeColor && { "--icon-stroke": getColorValue(strokeColor) } as React.CSSProperties),
+  };
+
+  return (
+    <div className={`icon-component ${className}`} style={style}>
+      <IconSvg />
+    </div>
+  );
 };
+
+export default IconComponent;
