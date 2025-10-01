@@ -73,13 +73,21 @@ export const FilmDetail = () => {
         <div>
           {
             isInWishlist(filmId!) ?
-            <Button variant="icon" icon={"heart"} onClick={()=>removeFromWishlist(filmId!)}/>
+            <Button 
+            icon={"heart-outline"} 
+            iconStroke="text"
+            label="Remove from favourites"
+            onClick={()=>removeFromWishlist(filmId!)}/>
             :
-            <Button variant="icon" icon={"heart"} onClick={()=>addToWishlist(film)}/>
+            <Button  
+            icon={"heart-solid"}  
+            iconFill="accent"
+            label="Add to favourites"
+            onClick={()=>addToWishlist(film)}/>
           }
       <Typography tag="h1" >{film.title}</Typography>
       <Typography>{film.overview}</Typography>
-      <IconComponent name="heart" alt={"want"}/>
+
 
         </div>
 

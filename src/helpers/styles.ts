@@ -11,3 +11,16 @@ export const colorMap: Record<Colors, string> = {
   secondary: "#2d2d2d",
   upcoming: "#10b981",
 };
+
+export const colorVarMap: Record<Colors, string> = {
+  "primary": "var(--color-primary)",
+  "secondary": "var(--color-secondary)",
+  "accent": "var(--color-accent)", 
+  "text": "var(--color-text)",     
+  "text-secondary": "var(--color-text-secondary)",
+  "background": "var(--color-background)",
+  "surface": "var(--color-surface)",
+  "popular": "var(--color-popular)",
+  "top-rated": "var(--color-top-rated)",
+  "upcoming": "var(--color-upcoming)",   
+};

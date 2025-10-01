@@ -9,7 +9,7 @@ import React from "react";
 
 export type IconName = "star" | "heart" | "heart-solid" | "heart-outline";
 
-interface IconComponentProps {
+export interface IconComponentProps {
   name: IconName;
   fillColor?: Colors | "none";
   strokeColor?: Colors | "none";

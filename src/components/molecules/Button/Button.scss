@@ -1,5 +1,21 @@
-.button_icon {
+.button {
+    border-radius: 25%;
+    display: inline-flex;
+    padding: var(--spacing-xs);
+    align-items: center;
+    flex-direction: column-reverse;
+    border: none;
+outline: none;
+    justify-content: center;
+                box-shadow: none;
+        transform: none;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.button-icon {
+    @extend .button;
     background-color: transparent;
-    height: 3rem;
-    width: 3rem;
+    border-radius: 50%;
 }

@@ -6,35 +6,34 @@ export type ButtonType = "submit" | "button" | "reset";
 export type ContainerShape = "square" | "rounded" | "circle" | "pill";
 export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   children?: React.ReactNode | React.ReactNode[];
-  label?: string; //typography;
-  variant?: string | "icon" | "base";
+  label?: string;
+  variant?: "primary" | "secondary" | "tertiary";
   type?: ButtonType;
   shape?: ContainerShape;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: IconName;
-  alt?: IconComponentProps["alt"];
+  iconFill?: IconComponentProps["fillColor"];
+  iconStroke?: IconComponentProps["strokeColor"];
 }
 export const Button = ({
   children,
   label,
   type = "button",
-  variant = "base",
+  variant = "primary",
   shape = "rounded",
   onClick,
   onMouseEnter,
   onMouseLeave,
-  alt,
   icon,
+  iconFill,
+  iconStroke,
   ...rest
 }: ButtonProps) => {
-  const buttonStyles: Record<typeof variant, string>= {
-    base: "button_base",
-    icon: "button_icon"
-  }
-  
+
+  const btnStyles = icon ? "button-icon" : "";
   return (
     <button
-      className={buttonStyles[variant]}
+      className={`button ${btnStyles}`}
       type={type}
       onClick={type !== "submit" ? onClick : undefined}
       onMouseEnter={onMouseEnter}
@@ -42,7 +41,11 @@ export const Button = ({
     >
       {children}
       {label && <Typography textStyle="label">{label}</Typography>}
-      {icon && <IconComponent name={icon} alt={alt ?? icon} />}
+      {icon && <IconComponent 
+      name={icon} 
+      fillColor={iconFill}
+      strokeColor={iconStroke}
+      />}
     </button>
   );
 };
