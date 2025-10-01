@@ -3,8 +3,7 @@ import { Typography } from "@/components";
 import "./Header.scss";
 
 export function Header() {
-  const location = useLocation();
-  console.log("🚀 ~ Header ~ location:", location);
+  // const location = useLocation();
   return (
     <header className="header">
       <nav>

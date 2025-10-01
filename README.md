@@ -20,17 +20,3 @@ npm install
    npm run dev
 
 Access: Navigate to http://localhost:5173
-
-3. Production Build
-   The application must be built into separate client and server bundles before running in a production environment.
-
-npm run build
-This command sequentially executes:
-
-npm run build:client: Creates optimized client assets in ./dist/client.
-
-npm run build:server: Creates the optimized server bundle (entry-server.js) in ./dist/server.
-
-4. Run the application
-
-npm run preview
